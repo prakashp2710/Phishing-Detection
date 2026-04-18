@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Alzheimer's Predictor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #eef2ff 0%, #ffffff 45%, #eef2ff 100%);
+      color: #0f172a;
+    }
+
+    .dashboard-header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 1rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .dashboard-title {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .dashboard-subtitle {
+      margin: 0.35rem 0 0;
+      color: #475569;
+      font-size: 1rem;
+    }
+
+    .dashboard-hero {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    .dashboard-card {
+      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      padding: 2rem;
+    }
+
+    .card-section {
+      margin-bottom: 1.75rem;
+    }
+
+    .summary-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1rem;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.12);
+      color: #1d4ed8;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .recent-result {
+      border-radius: 20px;
+      padding: 1.75rem;
+      background: linear-gradient(180deg, rgba(59, 130, 246, 0.08), rgba(255, 255, 255, 0.98));
+      border: 1px solid rgba(37, 99, 235, 0.16);
+    }
+
+    .result-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1e40af;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .recent-result h3 {
+      margin-bottom: 0.75rem;
+      font-size: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .dashboard-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .dashboard-actions .btn {
+      min-width: 180px;
+    }
+
+    .metrics-grid {
+      gap: 1rem;
+    }
+
+    .metric-card {
+      border-radius: 20px;
+      padding: 1.5rem;
+      background: white;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      box-shadow: 0 12px 25px rgba(15, 23, 42, 0.05);
+      min-height: 140px;
+    }
+
+    .metric-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+      color: #334155;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #2563eb;
+    }
+
+    .empty-state {
+      padding: 2rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px dashed rgba(148, 163, 184, 0.4);
+      text-align: center;
+    }
+
+    .empty-state h4 {
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .empty-state p {
+      margin-bottom: 1.5rem;
+      color: #475569;
+    }
+
+    .logout-button {
+      min-width: 140px;
+    }
+
+    @media (max-width: 992px) {
+      .dashboard-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="dashboard-header">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
+      <div>
+        <p class="dashboard-title">Dashboard</p>
+        <p class="dashboard-subtitle">Welcome back, {{ user }}. Review your most recent assessment and continue your care journey.</p>
+      </div>
+      <div class="d-flex align-items-center gap-2">
+        <a href="/predict" class="btn btn-outline-primary">New Assessment</a>
+        <a href="/logout" class="btn btn-danger logout-button"><i class="bi bi-box-arrow-right"></i> Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard-hero">
+    <div class="dashboard-card">
+      <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start gap-4 card-section">
+        <div>
+          <span class="summary-pill"><i class="bi bi-speedometer2"></i> Recent prediction</span>
+          <h2 class="mt-3">Your latest Alzheimer’s assessment</h2>
+          <p class="text-muted">A quick overview of your most recent brain health prediction and the key markers used by the model.</p>
+        </div>
+        <div class="dashboard-actions">
+          <a href="/predict" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Update data</a>
+          <a href="/result" class="btn btn-outline-secondary"><i class="bi bi-graph-up"></i> View full result</a>
+        </div>
+      </div>
+
+      {% if prediction_text %}
+      <div class="recent-result card-section">
+        <div class="result-badge"><i class="bi bi-bar-chart-line"></i> Latest prediction</div>
+        <h3>{{ prediction_text|safe }}</h3>
+        {% if details_text %}
+          <div class="mt-3">
+            <strong>Recommended next steps:</strong>
+            <div class="mt-2 text-muted">{{ details_text|safe }}</div>
+          </div>
+        {% endif %}
+        <div class="row mt-4 g-3">
+          <div class="col-md-4">
+            <div class="metric-card">
+              <div class="metric-title">Assessment Score</div>
+              <div class="metric-value">{{ assessment_score or '—' }}%</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="metric-card">
+              <div class="metric-title">Completed</div>
+              <div class="metric-value">{{ timestamp or 'N/A' }}</div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="metric-card">
+              <div class="metric-title">Patient</div>
+              <div class="metric-value">{{ user }}</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4 g-3">
+          <div class="col-lg-6">
+            <div class="metric-card">
+              <strong>Core inputs</strong>
+              <ul class="mt-3 mb-0" style="list-style: disc; padding-left: 1.25rem; color: #475569;">
+                <li>MMSE: {{ input_data.get('MMSE', '-') }}</li>
+                <li>ADL: {{ input_data.get('ADL', '-') }}</li>
+                <li>Sleep Quality: {{ input_data.get('SleepQuality', '-') }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="metric-card">
+              <strong>Health status</strong>
+              <ul class="mt-3 mb-0" style="list-style: disc; padding-left: 1.25rem; color: #475569;">
+                <li>Diabetes: {{ 'Yes' if input_data.get('Diabetes') == 1 else 'No' }}</li>
+                <li>Hypertension: {{ 'Yes' if input_data.get('Hypertension') == 1 else 'No' }}</li>
+                <li>Family history: {{ 'Yes' if input_data.get('FamilyHistoryAlzheimers') == 1 else 'No' }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="empty-state card-section">
+        <h4>No recent prediction available</h4>
+        <p>Start a new assessment to see your Alzheimer’s risk profile and recommendations here.</p>
+        <a href="/predict" class="btn btn-primary"><i class="bi bi-rocket-fill"></i> Start Assessment</a>
+      </div>
+      {% endif %}
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

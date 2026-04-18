@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Health Recommendations - Alzheimer Prediction</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 2rem;
+  color: #1a202c;
+}
+
+.recommendations-card {
+  max-width: 1100px;
+  width: 100%;
+  border-radius: 24px;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card-body {
+  background: transparent;
+  padding: 3rem;
+}
+
+h1 {
+  text-align: center;
+  color: #1a202c;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.back-link {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.back-link a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  background: rgba(79, 70, 229, 0.1);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-link a:hover {
+  background: #4f46e5;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+}
+
+.recommendation-section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  border-left: 4px solid #4f46e5;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.recommendation-section:hover {
+  transform: translateY(-3px);
+}
+
+.recommendation-section h3 {
+  color: #1a202c;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.4rem;
+}
+
+.recommendation-section h3 i {
+  color: #4f46e5;
+  font-size: 1.5rem;
+}
+
+.recommendation-list {
+  list-style: none;
+  padding: 0;
+}
+
+.recommendation-list li {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(75, 85, 99, 0.2);
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: padding-left 0.3s ease;
+}
+
+.recommendation-list li:hover {
+  padding-left: 1rem;
+}
+
+.recommendation-list li:last-child {
+  border-bottom: none;
+}
+
+.recommendation-list li i {
+  color: #4f46e5;
+  font-size: 1.2rem;
+  margin-top: 0.25rem;
+  flex-shrink: 0;
+}
+
+.recommendation-list li strong {
+  color: #1a202c;
+  font-weight: 600;
+}
+
+.disclaimer {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-top: 2rem;
+  backdrop-filter: blur(10px);
+}
+
+.disclaimer h4 {
+  color: #92400e;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.disclaimer h4 i {
+  color: #f59e0b;
+}
+
+.disclaimer p {
+  color: #92400e;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  .card-body {
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .recommendation-section {
+    padding: 1.5rem;
+  }
+
+  .recommendation-list li {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }}
+/* Focus states */
+.recommendation-section:focus,
+.back-link a:focus {
+  outline: 2px solid #4f46e5;
+  outline-offset: 2px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<div class="recommendations-card">
+<div class="row g-0">
+
+<div class="col-12 card-body">
+
+<h1>🧠 Health Recommendations for Alzheimer’s Prevention</h1>
+<p class="text-center text-muted mb-4">Based on clinical research and your health profile, here are personalized recommendations to reduce Alzheimer's disease.</p>
+<p class="back-link"><a href="/">← Back to Home</a></p>
+
+<div class="recommendation-section">
+  <h3><i class="bi bi-brain"></i> Cognitive Health</h3>
+  <ul class="recommendation-list">
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Daily Mental Stimulation:</strong> Engage in puzzles, reading, learning new skills, playing musical instruments, or learning a new language daily to build cognitive reserve.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Social Engagement:</strong> Maintain weekly social interactions with friends, family, or community groups to stimulate brain function and reduce isolation.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Quality Sleep:</strong> Aim for 7-9 hours of quality sleep per night. Establish a consistent sleep schedule and create a relaxing bedtime routine.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Stress Management:</strong> Practice daily mindfulness, meditation, yoga, or deep breathing exercises to reduce chronic stress and cortisol levels.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Memory Monitoring:</strong> Track any changes in memory or thinking abilities and discuss concerns with your healthcare provider promptly.</li>
+  </ul>
+</div>
+
+<div class="recommendation-section">
+  <h3><i class="bi bi-heart-pulse"></i> Physical Health</h3>
+  <ul class="recommendation-list">
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Aerobic Exercise:</strong> Aim for 150 minutes of moderate aerobic activity (brisk walking, swimming, cycling) or 75 minutes of vigorous activity weekly.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Cardiovascular Health:</strong> Monitor blood pressure (<120/80 mmHg), cholesterol (LDL <100 mg/dL), and maintain healthy BMI (18.5-24.9) through diet and exercise.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Mediterranean Diet:</strong> Focus on whole foods: fatty fish (salmon, sardines), nuts, olive oil, colorful vegetables, whole grains, and limited red meat.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Hydration & Nutrition:</strong> Stay well-hydrated (8+ glasses water daily) and consider omega-3 supplements if dietary intake is insufficient.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Diabetes Management:</strong> If diabetic, maintain tight blood sugar control (HbA1c <7%) as diabetes significantly increases dementia risk.</li>
+  </ul>
+</div>
+
+<div class="recommendation-section">
+  <h3><i class="bi bi-shield-check"></i> Medical Check-ups</h3>
+  <ul class="recommendation-list">
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Comprehensive Annual Screenings:</strong> Schedule yearly check-ups including blood pressure, cholesterol, diabetes screening, and thyroid function tests.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Cognitive Assessments:</strong> Discuss regular cognitive evaluations with your doctor, especially if you have risk factors like family history or mild symptoms.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Medication Review:</strong> Have all medications reviewed annually by your pharmacist or doctor to avoid interactions and optimize brain health.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Family History Documentation:</strong> Share detailed family medical history with your doctor for personalized risk assessment and genetic counseling if needed.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Hearing & Vision Checks:</strong> Regular hearing and vision screenings as untreated loss increases dementia risk by 30-50%.</li>
+  </ul>
+</div>
+
+<div class="recommendation-section">
+  <h3><i class="bi bi-house-heart"></i> Lifestyle Adjustments</h3>
+  <ul class="recommendation-list">
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Alcohol Moderation:</strong> Limit alcohol to 1 drink/day for women, 2 for men. Heavy drinking increases dementia risk by 2-3 times.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Smoking Cessation:</strong> Quit smoking immediately - smokers have 45% higher dementia risk. Seek nicotine replacement or counseling support.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Head Injury Prevention:</strong> Always wear helmets during activities, use seatbelts, and take precautions to prevent falls and head trauma.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Environmental Protection:</strong> Minimize exposure to air pollution, heavy metals, and toxins. Use air purifiers and avoid contaminated areas.</li>
+    <li><i class="bi bi-check-circle-fill"></i> <strong>Long-term Learning:</strong> Pursue lifelong education, career development, or new hobbies to maintain cognitive reserve throughout life.</li>
+  </ul>
+</div>
+
+<div class="disclaimer">
+  <h4><i class="bi bi-info-circle"></i> Important Disclaimer</h4>
+  <p>These recommendations are for general health improvement and Alzheimer's disease prevention. They are not a substitute for professional medical advice. Please consult with your healthcare provider for personalized recommendations based on your specific health conditions and factors.</p>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
